@@ -1,4 +1,49 @@
-;;; doc-view-save-slice.el
+;;; doc-view-save-slice.el --- Persistent slice setting per doc-view file
+
+;; Copyright (C) 2018 Marcin Kolenda
+
+;; Author: Marcin Kolenda <marcinkolenda419@gmail.com>
+;; Maintainer: Marcin Kolenda <marcinkolenda419@gmail.com>
+;; Version: 1.0
+;; Package-Requires: (doc-view)
+;; Keywords: convenience
+
+;; This file is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; This file is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING.  If not, write to
+;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+;; Boston, MA 02110-1301, USA.
+
+;;; Commentary:
+
+;; Persistent slice setting per doc-view file.
+
+;; Commands:
+;;
+;; Customizable Options:
+;;
+;; Below are customizable option list:
+;;
+
+;; Installation:
+
+;; Add the following to your emacs init file:
+;;
+;; (require 'doc-view-save-slice)
+;; (add-hook 'doc-view-mode-hook 'doc-view-save-slice-mode)
+
+;; That's all.
+
+;;; Code:
 (require 'doc-view)
 
 (defgroup doc-view-save-slice nil
@@ -75,7 +120,7 @@ was when you previously visited the same file."
 	        ;; Don't use write-file; we don't want this buffer to visit it.
           (write-region (point-min)
                         (point-max) file)
-        (file-error (message "Saving places: can't write %s" file)))
+        (file-error (message "Saving slices: can't write %s" file)))
       (kill-buffer (current-buffer)))))
 
 (defun doc-view-load-slice-hash-from-file ()
@@ -100,3 +145,5 @@ was when you previously visited the same file."
       (doc-view-save-slice-hash-to-file)))
 
 (provide 'doc-view-save-slice)
+
+;;; doc-view-save-slice.el ends here
